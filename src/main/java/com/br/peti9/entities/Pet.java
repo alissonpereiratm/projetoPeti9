@@ -22,7 +22,7 @@ public class Pet {
     private double weight;
     private Date vaccineDate;
     private String vaccineType;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Tutor tutor;
 
     public Pet() {
@@ -40,7 +40,7 @@ public class Pet {
         this.vaccineType = vaccineType;
         this.tutor = tutor;
     }
-    
+
     public int getId() {
         return id;
     }

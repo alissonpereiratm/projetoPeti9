@@ -2,6 +2,8 @@ package com.br.peti9.entities;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ private int id;
 private String name;
 private String surname;
 private Date birth;
+@JsonIgnore
 @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
 private List <Pet> pets;
 
