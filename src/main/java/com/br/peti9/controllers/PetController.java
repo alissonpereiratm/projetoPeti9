@@ -41,12 +41,28 @@ public class PetController {
                 return ResponseEntity.ok("Pet salvo com sucesso!");
             }
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok("Tutor não existe");
         }
     }
 
     @GetMapping(value = "/searchId/{id}")
     public Pet getPet(@PathVariable("id") int id) {
         return petRepository.findById(id).get();
+    }
+
+    @GetMapping(value = "/deleteId/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
+        Optional<Pet> pet = petRepository.findById(id);
+        if (pet.isPresent()) {
+            petRepository.deleteById(id);
+            return ResponseEntity.ok("Pet excluido com sucesso");
+        } else {
+            return ResponseEntity.ok("Pet não encontrado");
+        }
+    }
+
+    @GetMapping(value = "/list")
+    public List<Pet> getListPet() {
+        return petRepository.findAll();
     }
 }
