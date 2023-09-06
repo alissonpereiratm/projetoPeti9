@@ -23,6 +23,13 @@ private Date birth;
 @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
 private List <Pet> pets;
 
+
+
+@Override
+public String toString() {
+    return "Tutor [id=" + id + ", name=" + name + ", surname=" + surname + ", birth=" + birth + ", pets=" + pets + "]";
+}
+
 public Tutor() {
 }
 
