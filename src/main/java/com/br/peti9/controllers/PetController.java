@@ -35,13 +35,13 @@ public class PetController {
             boolean petExists = petTutor.stream().anyMatch(p -> p.getName().equals(petName));
 
             if (petExists) {
-                return ResponseEntity.ok("Nome de pet já existente!");
+                return ResponseEntity.ok("Existing pet name!");
             } else {
                 petRepository.save(pet);
-                return ResponseEntity.ok("Pet salvo com sucesso!");
+                return ResponseEntity.ok("Pet saved successfully!");
             }
         } else {
-            return ResponseEntity.ok("Tutor não existe");
+            return ResponseEntity.ok("Tutor not found!");
         }
     }
 
