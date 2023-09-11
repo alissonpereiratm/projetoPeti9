@@ -1,10 +1,14 @@
 package com.br.peti9.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.peti9.entities.Pet;
 import com.br.peti9.entities.Tutor;
 import com.br.peti9.repository.PetRepository;
 import com.br.peti9.repository.TutorRepository;
@@ -27,6 +31,17 @@ public class TutorController {
     @GetMapping(value="/searchId/{id}")
     public Tutor getTutor (@PathVariable("id") int id) {
       return tutorRepository.findById(id).get();
+    }
+
+       @GetMapping(value = "/deleteId/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
+        Optional<Tutor> tutor = tutorRepository.findById(id);
+        if (tutor.isPresent()) {
+            tutorRepository.deleteById(id);
+            return ResponseEntity.ok("Tutor excluido com sucesso");
+        } else {
+            return ResponseEntity.ok("Tutor não encontrado");
+        }
     }
     
 
