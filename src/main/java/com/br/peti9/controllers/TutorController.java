@@ -5,18 +5,20 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.peti9.entities.Pet;
 import com.br.peti9.entities.Tutor;
-import com.br.peti9.repository.PetRepository;
 import com.br.peti9.repository.TutorRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
+@Controller
 @RestController
 @RequestMapping(value = "/tutor")
 public class TutorController {
@@ -40,7 +42,7 @@ public class TutorController {
     return tutorRepository.findById(id).get();
   }
 
-  @GetMapping(value = "/deleteId/{id}")
+  @DeleteMapping(value = "/deleteId/{id}")
   public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
     Optional<Tutor> tutor = tutorRepository.findById(id);
     if (tutor.isPresent()) {
@@ -51,4 +53,24 @@ public class TutorController {
     }
   }
 
+  @GetMapping(value = "/list")
+  public List<Tutor> getListTutor() {
+    return tutorRepository.findAll();
+  }
+
+  @PutMapping("/{name}")
+  public ResponseEntity<String> updateTutorByName(@PathVariable String name, @RequestBody Tutor updatedTutor) {
+    Optional<Tutor> existingTutorOptional = tutorRepository.findByName(name);
+
+    if (existingTutorOptional.isPresent()) {
+      Tutor existingTutor = existingTutorOptional.get();
+      existingTutor.setName(updatedTutor.getName());
+      existingTutor.setSurname(updatedTutor.getSurname());
+      existingTutor.setBirth(updatedTutor.getBirth());
+      tutorRepository.save(existingTutor);
+      return ResponseEntity.ok("Tutor updated successfully.");
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
 }

@@ -5,9 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +20,7 @@ import com.br.peti9.entities.Tutor;
 import com.br.peti9.repository.PetRepository;
 import com.br.peti9.repository.TutorRepository;
 
+@Controller
 @RestController
 @RequestMapping(value = "/pet")
 public class PetController {
@@ -50,7 +55,7 @@ public class PetController {
         return petRepository.findById(id).get();
     }
 
-    @GetMapping(value = "/deleteId/{id}")
+    @DeleteMapping(value = "/deleteId/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
         Optional<Pet> pet = petRepository.findById(id);
         if (pet.isPresent()) {
@@ -65,4 +70,25 @@ public class PetController {
     public List<Pet> getListPet() {
         return petRepository.findAll();
     }
+
+      @PutMapping("/{name}")
+  public ResponseEntity<String> updateTutorByName(@PathVariable String name, @RequestBody Pet updatePet) {
+    Optional<Pet> existingPetOptional = petRepository.findByName(name);
+
+    if (existingPetOptional.isPresent()) {
+      Pet existingPet = existingPetOptional.get();
+      existingPet.setName(updatePet.getName());
+      existingPet.setBreed(updatePet.getBreed());
+      existingPet.setBirth(updatePet.getBirth());
+      existingPet.setColor(updatePet.getColor());
+      existingPet.setWeight(updatePet.getWeight());
+      existingPet.setVaccineDate(updatePet.getVaccineDate());
+      existingPet.setVaccineType(updatePet.getVaccineType());
+      petRepository.save(existingPet);
+      return ResponseEntity.ok("Pet updated successfully.");
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
 }

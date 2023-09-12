@@ -24,12 +24,6 @@ private Date birth;
 private List <Pet> pets;
 
 
-
-@Override
-public String toString() {
-    return "Tutor [id=" + id + ", name=" + name + ", surname=" + surname + ", birth=" + birth + ", pets=" + pets + "]";
-}
-
 public Tutor() {
 }
 

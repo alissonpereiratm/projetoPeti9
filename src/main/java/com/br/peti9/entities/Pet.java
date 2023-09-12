@@ -2,7 +2,6 @@ package com.br.peti9.entities;
 
 import java.util.Date;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
