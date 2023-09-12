@@ -27,18 +27,6 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(int id, String name, String breed, Date birth, String color, double weight, Date vaccineDate,
-            String vaccineType, Tutor tutor) {
-        this.id = id;
-        this.name = name;
-        this.breed = breed;
-        this.birth = birth;
-        this.color = color;
-        this.weight = weight;
-        this.vaccineDate = vaccineDate;
-        this.vaccineType = vaccineType;
-        this.tutor = tutor;
-    }
 
     public int getId() {
         return id;

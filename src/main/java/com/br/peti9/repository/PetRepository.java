@@ -15,4 +15,5 @@ public interface PetRepository extends JpaRepository<Pet, Integer> {
     @Query("SELECT p FROM Pet p WHERE p.name ILIKE %:name%")
 List<Pet> findByNameContaining(@Param("name") String name);
 
+
 }

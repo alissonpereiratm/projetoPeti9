@@ -50,12 +50,12 @@ public class PetController {
         }
     }
 
-    @GetMapping(value = "/searchId/{id}")
+    @GetMapping(value = "/searchById/{id}")
     public Pet getPet(@PathVariable("id") int id) {
         return petRepository.findById(id).get();
     }
 
-    @DeleteMapping(value = "/deleteId/{id}")
+    @DeleteMapping(value = "/deleteById/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
         Optional<Pet> pet = petRepository.findById(id);
         if (pet.isPresent()) {
@@ -71,10 +71,29 @@ public class PetController {
         return petRepository.findAll();
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<String> updateTutorByName(@PathVariable String name, @RequestBody Pet updatePet) {
+    @PutMapping("/updateByName/{name}")
+    public ResponseEntity<String> updatePetByName(@PathVariable String name, @RequestBody Pet updatePet) {
         Optional<Pet> existingPetOptional = petRepository.findByName(name);
 
+        if (existingPetOptional.isPresent()) {
+            Pet existingPet = existingPetOptional.get();
+            existingPet.setName(updatePet.getName());
+            existingPet.setBreed(updatePet.getBreed());
+            existingPet.setBirth(updatePet.getBirth());
+            existingPet.setColor(updatePet.getColor());
+            existingPet.setWeight(updatePet.getWeight());
+            existingPet.setVaccineDate(updatePet.getVaccineDate());
+            existingPet.setVaccineType(updatePet.getVaccineType());
+            petRepository.save(existingPet);
+            return ResponseEntity.ok("Pet updated successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/updateById/{id}")
+    public ResponseEntity<String> updatePetById(@PathVariable int id, @RequestBody Pet updatePet) {
+        Optional<Pet> existingPetOptional = petRepository.findById(id);
         if (existingPetOptional.isPresent()) {
             Pet existingPet = existingPetOptional.get();
             existingPet.setName(updatePet.getName());

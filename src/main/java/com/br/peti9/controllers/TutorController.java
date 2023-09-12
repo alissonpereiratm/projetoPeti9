@@ -38,12 +38,12 @@ public class TutorController {
     }
   }
 
-  @GetMapping(value = "/searchId/{id}")
+  @GetMapping(value = "/searchById/{id}")
   public Tutor getTutor(@PathVariable("id") int id) {
     return tutorRepository.findById(id).get();
   }
 
-  @DeleteMapping(value = "/deleteId/{id}")
+  @DeleteMapping(value = "/deleteById/{id}")
   public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
     Optional<Tutor> tutor = tutorRepository.findById(id);
     if (tutor.isPresent()) {
@@ -59,7 +59,7 @@ public class TutorController {
     return tutorRepository.findAll();
   }
 
-  @PutMapping("/{name}")
+  @PutMapping("/updateByName/{name}")
   public ResponseEntity<String> updateTutorByName(@PathVariable String name, @RequestBody Tutor updatedTutor) {
     Optional<Tutor> existingTutorOptional = tutorRepository.findByName(name);
 
@@ -74,7 +74,7 @@ public class TutorController {
       return ResponseEntity.notFound().build();
     }
   }
-  
+
   @GetMapping(value = "/searchByName/{name}")
   public List<Tutor> searchTutorsByName(@PathVariable("name") String name) {
     return tutorRepository.findByNameContaining(name);
