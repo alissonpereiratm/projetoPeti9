@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.peti9.entities.Pet;
 import com.br.peti9.entities.Tutor;
 import com.br.peti9.repository.TutorRepository;
 
@@ -73,4 +74,10 @@ public class TutorController {
       return ResponseEntity.notFound().build();
     }
   }
+  
+  @GetMapping(value = "/searchByName/{name}")
+  public List<Tutor> searchTutorsByName(@PathVariable("name") String name) {
+    return tutorRepository.findByNameContaining(name);
+  }
+
 }

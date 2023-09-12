@@ -71,24 +71,29 @@ public class PetController {
         return petRepository.findAll();
     }
 
-      @PutMapping("/{name}")
-  public ResponseEntity<String> updateTutorByName(@PathVariable String name, @RequestBody Pet updatePet) {
-    Optional<Pet> existingPetOptional = petRepository.findByName(name);
+    @PutMapping("/{name}")
+    public ResponseEntity<String> updateTutorByName(@PathVariable String name, @RequestBody Pet updatePet) {
+        Optional<Pet> existingPetOptional = petRepository.findByName(name);
 
-    if (existingPetOptional.isPresent()) {
-      Pet existingPet = existingPetOptional.get();
-      existingPet.setName(updatePet.getName());
-      existingPet.setBreed(updatePet.getBreed());
-      existingPet.setBirth(updatePet.getBirth());
-      existingPet.setColor(updatePet.getColor());
-      existingPet.setWeight(updatePet.getWeight());
-      existingPet.setVaccineDate(updatePet.getVaccineDate());
-      existingPet.setVaccineType(updatePet.getVaccineType());
-      petRepository.save(existingPet);
-      return ResponseEntity.ok("Pet updated successfully.");
-    } else {
-      return ResponseEntity.notFound().build();
+        if (existingPetOptional.isPresent()) {
+            Pet existingPet = existingPetOptional.get();
+            existingPet.setName(updatePet.getName());
+            existingPet.setBreed(updatePet.getBreed());
+            existingPet.setBirth(updatePet.getBirth());
+            existingPet.setColor(updatePet.getColor());
+            existingPet.setWeight(updatePet.getWeight());
+            existingPet.setVaccineDate(updatePet.getVaccineDate());
+            existingPet.setVaccineType(updatePet.getVaccineType());
+            petRepository.save(existingPet);
+            return ResponseEntity.ok("Pet updated successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-  }
+
+    @GetMapping(value = "/searchByName/{name}")
+    public List<Pet> searchPetsByName(@PathVariable("name") String name) {
+        return petRepository.findByNameContaining(name);
+    }
 
 }
