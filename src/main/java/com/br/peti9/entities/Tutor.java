@@ -23,7 +23,6 @@ private Date birth;
 @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
 private List <Pet> pets;
 
-
 public Tutor() {
 }
 
