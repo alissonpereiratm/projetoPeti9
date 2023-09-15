@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.br.peti9.entities.Pet;
 import com.br.peti9.entities.Tutor;
 
 public interface TutorRepository extends JpaRepository<Tutor, Integer> {

@@ -24,9 +24,6 @@ public class Pet {
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Tutor tutor;
 
-    public Pet() {
-    }
-
 
     public int getId() {
         return id;
