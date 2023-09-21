@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 		"com.br.peti9.repository",
 		"com.br.peti9.controllers",
 })
+
 @EnableJpaRepositories
 public class Peti9Application {
 
