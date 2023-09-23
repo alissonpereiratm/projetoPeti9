@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 		"com.br.peti9.entities",
 		"com.br.peti9.repository",
 		"com.br.peti9.controllers",
+		"com.br.peti9.services",
 })
 
 @EnableJpaRepositories

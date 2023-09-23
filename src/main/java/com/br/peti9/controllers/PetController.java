@@ -1,7 +1,6 @@
 package com.br.peti9.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.peti9.entities.Pet;
-import com.br.peti9.entities.Tutor;
 import com.br.peti9.repository.PetRepository;
 import com.br.peti9.repository.TutorRepository;
+import com.br.peti9.services.PetService;
 
 @Controller
 @RestController
@@ -28,63 +27,45 @@ public class PetController {
     PetRepository petRepository;
     @Autowired
     TutorRepository tutorRepository;
+    @Autowired
+    PetService petService;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(Pet pet) {
-        String petName = pet.getName();
-        Optional<Tutor> tutorPet = tutorRepository.findById(pet.getTutor().getId());
-
-        if (tutorPet.isPresent()) {
-            Tutor tutor = tutorPet.get();
-            List<Pet> petTutor = tutor.getPets();
-            boolean petExists = petTutor.stream().anyMatch(p -> p.getName().equals(petName));
-
-            if (petExists) {
+        int response = petService.register(pet);
+        switch (response) {
+            case 1:
                 return ResponseEntity.ok("Existing pet name!");
-            } else {
-                petRepository.save(pet);
+            case 2:
                 return ResponseEntity.ok("Pet saved successfully!");
-            }
-        } else {
-            return ResponseEntity.ok("Tutor not found!");
+            case 0:
+                return ResponseEntity.ok("Tutor not found!");
         }
+        return null;
     }
 
     @GetMapping(value = "/searchById/{id}")
     public Pet getPet(@PathVariable("id") int id) {
-        return petRepository.findById(id).get();
+        return petService.getPet(id);
     }
 
     @DeleteMapping(value = "/deleteById/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
-        Optional<Pet> pet = petRepository.findById(id);
-        if (pet.isPresent()) {
-            petRepository.deleteById(id);
-            return ResponseEntity.ok("Pet excluido com sucesso");
+        if (petService.deleteById(id)) {
+            return ResponseEntity.ok("Pet successfully deleted");
         } else {
-            return ResponseEntity.ok("Pet não encontrado");
+            return ResponseEntity.ok("Pet not found");
         }
     }
 
     @GetMapping(value = "/list")
     public List<Pet> getListPet() {
-        return petRepository.findAll();
+        return petService.getListPet();
     }
 
     @PutMapping("/updateByName/{name}")
     public ResponseEntity<String> updatePetByName(@PathVariable String name, @RequestBody Pet updatePet) {
-        Optional<Pet> existingPetOptional = petRepository.findByName(name);
-
-        if (existingPetOptional.isPresent()) {
-            Pet existingPet = existingPetOptional.get();
-            existingPet.setName(updatePet.getName());
-            existingPet.setBreed(updatePet.getBreed());
-            existingPet.setBirth(updatePet.getBirth());
-            existingPet.setColor(updatePet.getColor());
-            existingPet.setWeight(updatePet.getWeight());
-            existingPet.setVaccineDate(updatePet.getVaccineDate());
-            existingPet.setVaccineType(updatePet.getVaccineType());
-            petRepository.save(existingPet);
+        if (petService.updatePetByName(name, updatePet)) {
             return ResponseEntity.ok("Pet updated successfully.");
         } else {
             return ResponseEntity.notFound().build();
@@ -93,17 +74,7 @@ public class PetController {
 
     @PutMapping("/updateById/{id}")
     public ResponseEntity<String> updatePetById(@PathVariable int id, @RequestBody Pet updatePet) {
-        Optional<Pet> existingPetOptional = petRepository.findById(id);
-        if (existingPetOptional.isPresent()) {
-            Pet existingPet = existingPetOptional.get();
-            existingPet.setName(updatePet.getName());
-            existingPet.setBreed(updatePet.getBreed());
-            existingPet.setBirth(updatePet.getBirth());
-            existingPet.setColor(updatePet.getColor());
-            existingPet.setWeight(updatePet.getWeight());
-            existingPet.setVaccineDate(updatePet.getVaccineDate());
-            existingPet.setVaccineType(updatePet.getVaccineType());
-            petRepository.save(existingPet);
+        if (petService.deleteById(id)) {
             return ResponseEntity.ok("Pet updated successfully.");
         } else {
             return ResponseEntity.notFound().build();
@@ -112,7 +83,7 @@ public class PetController {
 
     @GetMapping(value = "/searchByName/{name}")
     public List<Pet> searchPetsByName(@PathVariable("name") String name) {
-        return petRepository.findByNameContaining(name);
+        return petService.searchPetsByName(name);
     }
 
 }
