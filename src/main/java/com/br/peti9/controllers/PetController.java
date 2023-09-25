@@ -27,8 +27,7 @@ public class PetController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(Pet pet) {
-        int response = petService.register(pet);
-        return switch (response) {
+        return switch (petService.register(pet)) {
             case 1 -> ResponseEntity.ok("Existing pet name!");
             case 2 -> ResponseEntity.ok("Pet saved successfully!");
             default -> ResponseEntity.ok("Tutor not found!");
