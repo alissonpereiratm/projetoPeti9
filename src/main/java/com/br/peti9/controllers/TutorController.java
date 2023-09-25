@@ -15,15 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.peti9.entities.Tutor;
-import com.br.peti9.repository.TutorRepository;
 import com.br.peti9.services.TutorService;
 
 @Controller
 @RestController
 @RequestMapping(value = "/tutor")
 public class TutorController {
-  @Autowired
-  TutorRepository tutorRepository;
+
   @Autowired
   TutorService tutorService;
 
