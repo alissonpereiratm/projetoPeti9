@@ -10,7 +10,7 @@ import com.br.peti9.entities.Tutor;
 import com.br.peti9.repository.TutorRepository;
 
 @Service
-public class TutorService {
+public class TutorService  {
 
     @Autowired
     TutorRepository tutorRepository;

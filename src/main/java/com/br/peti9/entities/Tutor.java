@@ -6,16 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Tutor {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
+public class Tutor extends BaseEntity{
+
 private String name;
 private String surname;
 private Date birth;

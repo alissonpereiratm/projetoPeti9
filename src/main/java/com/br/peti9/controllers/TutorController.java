@@ -31,9 +31,8 @@ public class TutorController {
   public ResponseEntity<String> register(Tutor tutor) {
     if (tutorService.register(tutor)) {
       return ResponseEntity.ok("Existing tutor name!");
-    } else {
-      return ResponseEntity.ok("Tutor successfully saved!");
     }
+    return ResponseEntity.ok("Tutor successfully saved!");
   }
 
   @GetMapping(value = "/searchById/{id}")
@@ -45,9 +44,8 @@ public class TutorController {
   public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
     if (tutorService.deleteById(id)) {
       return ResponseEntity.ok("Tutor successfully deleted");
-    } else {
-      return ResponseEntity.ok("Tutor not found");
     }
+    return ResponseEntity.ok("Tutor not found");
   }
 
   @GetMapping(value = "/list")
@@ -59,9 +57,8 @@ public class TutorController {
   public ResponseEntity<String> updateTutorByName(@PathVariable String name, @RequestBody Tutor updatedTutor) {
     if (tutorService.updateTutorByName(name, updatedTutor)) {
       return ResponseEntity.ok("Tutor updated successfully.");
-    } else {
+    } 
       return ResponseEntity.notFound().build();
-    }
   }
 
   @GetMapping(value = "/searchByName/{name}")

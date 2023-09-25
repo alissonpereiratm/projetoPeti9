@@ -33,15 +33,12 @@ public class PetController {
     @PostMapping("/register")
     public ResponseEntity<String> register(Pet pet) {
         int response = petService.register(pet);
-        switch (response) {
-            case 1:
-                return ResponseEntity.ok("Existing pet name!");
-            case 2:
-                return ResponseEntity.ok("Pet saved successfully!");
-            case 0:
-                return ResponseEntity.ok("Tutor not found!");
-        }
-        return null;
+        return switch (response) {
+            case 1 -> ResponseEntity.ok("Existing pet name!");
+            case 2 -> ResponseEntity.ok("Pet saved successfully!");
+            default -> ResponseEntity.ok("Tutor not found!");
+        };
+
     }
 
     @GetMapping(value = "/searchById/{id}")
