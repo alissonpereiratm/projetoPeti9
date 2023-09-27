@@ -28,22 +28,24 @@ public class TutorController {
   @PostMapping("/register")
   public ResponseEntity<String> register(Tutor tutor) {
     if (tutorService.register(tutor)) {
-      return ResponseEntity.ok("Existing tutor name!");
+      return ResponseEntity.ok("Tutor successfully saved!");
     }
-    return ResponseEntity.ok("Tutor successfully saved!");
+    return ResponseEntity.ok("Existing tutor name!");
   }
 
   @GetMapping(value = "/searchById/{id}")
-  public Tutor getTutor(@PathVariable("id") int id) {
-    return tutorService.getTutor(id);
+  public Tutor searchById(@PathVariable("id") int id) {
+    return tutorService.searchById(id);
   }
 
   @DeleteMapping(value = "/deleteById/{id}")
   public ResponseEntity<String> deleteById(@PathVariable("id") int id) {
-    if (tutorService.deleteById(id)) {
-      return ResponseEntity.ok("Tutor successfully deleted");
+    if (tutorService.deleteById(id)) 
+    { return ResponseEntity.ok("Tutor successfully deleted");
+    
     }
-    return ResponseEntity.ok("Tutor not found");
+     return ResponseEntity.ok("Tutor not found");
+    
   }
 
   @GetMapping(value = "/list")

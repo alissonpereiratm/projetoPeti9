@@ -51,7 +51,7 @@ public class TutorService  {
         }
     }
 
-    public Tutor getTutor(int id) {
+    public Tutor searchById(int id) {
         return tutorRepository.findById(id).get();
     }
 
