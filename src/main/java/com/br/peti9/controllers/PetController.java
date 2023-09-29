@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.peti9.entities.Pet;
 import com.br.peti9.services.PetService;
 
-@Controller
+
 @RestController
-@RequestMapping(value = "/pet")
+@RequestMapping(value = "/pets")
 public class PetController {
 
     @Autowired
