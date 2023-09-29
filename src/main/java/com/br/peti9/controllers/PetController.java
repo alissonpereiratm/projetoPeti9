@@ -19,7 +19,7 @@ import com.br.peti9.services.PetService;
 
 
 @RestController
-@RequestMapping(value = "/pets")
+@RequestMapping(value = "/pet")
 public class PetController {
 
     @Autowired

@@ -22,7 +22,7 @@ import com.br.peti9.services.TutorService;
 
 
 @RestController
-@RequestMapping(value = "/owner")
+@RequestMapping(value = "/tutor")
 public class TutorController {
 
   @Autowired
