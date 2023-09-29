@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.peti9.entities.Pet;
 import com.br.peti9.services.PetService;
 
-
 @RestController
 @RequestMapping(value = "/pet")
 public class PetController {
