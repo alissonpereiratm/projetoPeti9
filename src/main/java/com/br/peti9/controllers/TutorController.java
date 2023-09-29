@@ -1,6 +1,7 @@
 package com.br.peti9.controllers;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,8 @@ public class TutorController {
   TutorService tutorService;
 
   @PostMapping("/register")
-  public ResponseEntity<String> register(Tutor tutor) {
+  public ResponseEntity<String> register( String name ,String surname , Date birth) {
+        Tutor tutor = new Tutor(0, name, surname, birth, null);
     if (tutorService.register(tutor)) {
       return ResponseEntity.ok("Tutor successfully saved!");
     }
