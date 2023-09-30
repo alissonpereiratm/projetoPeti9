@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.peti9.dto.PetDto;
 import com.br.peti9.entities.Pet;
 import com.br.peti9.services.PetService;
 
@@ -35,7 +35,7 @@ public class PetController {
     }
 
     @GetMapping(value = "/searchById/{id}")
-    public Pet getPet(@PathVariable("id") int id) {
+    public PetDto getPet(@PathVariable("id") int id) {
         return petService.getPet(id);
     }
 
@@ -49,7 +49,7 @@ public class PetController {
     }
 
     @GetMapping(value = "/list")
-    public List<Pet> getListPet() {
+    public List<PetDto> getListPet() {
         return petService.getListPet();
     }
 
@@ -72,7 +72,7 @@ public class PetController {
     }
 
     @GetMapping(value = "/searchByName/{name}")
-    public List<Pet> searchPetsByName(@PathVariable("name") String name) {
+    public List<PetDto> searchPetsByName(@PathVariable("name") String name) {
         return petService.searchPetsByName(name);
     }
 

@@ -2,13 +2,12 @@ package com.br.peti9.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import com.br.peti9.dto.PetDto;
 import com.br.peti9.entities.Pet;
 import com.br.peti9.entities.Tutor;
 import com.br.peti9.repository.PetRepository;
@@ -43,8 +42,8 @@ public class PetService {
         }
     }
 
-    public Pet getPet(int id) {
-        return petRepository.findById(id).get();
+    public PetDto getPet(int id) {
+        return petRepository.findById(id).map(x -> new PetDto(x)).get();
     }
 
     public boolean deleteById(int id) {
@@ -57,8 +56,8 @@ public class PetService {
         }
     }
 
-    public List<Pet> getListPet() {
-        return petRepository.findAll();
+    public List<PetDto> getListPet() {
+        return petRepository.findAll().stream().map(PetDto::new).collect(Collectors.toList());
     }
 
     public boolean updatePetByName(String name, Pet updatePet) {
@@ -98,7 +97,8 @@ public class PetService {
         }
     }
 
-    public List<Pet> searchPetsByName(String name) {
-        return petRepository.findByNameContaining(name);
+    public List<PetDto> searchPetsByName(String name) {
+        return petRepository.findByNameContaining(name).stream().map(PetDto::new).collect(Collectors.toList());
     }
+
 }
