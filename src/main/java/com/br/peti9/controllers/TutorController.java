@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.peti9.dto.TutorDto;
 import com.br.peti9.entities.Tutor;
 import com.br.peti9.services.TutorService;
 
@@ -32,7 +33,7 @@ public class TutorController {
   }
 
   @GetMapping(value = "/searchById/{id}")
-  public Tutor searchById(@PathVariable("id") int id) {
+  public TutorDto searchById(@PathVariable("id") int id) {
     return tutorService.searchById(id);
   }
 
@@ -47,7 +48,7 @@ public class TutorController {
   }
 
   @GetMapping(value = "/list")
-  public List<Tutor> getListTutor() {
+  public List<TutorDto> getListTutor() {
     return tutorService.getListTutor();
   }
 

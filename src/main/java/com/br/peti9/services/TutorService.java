@@ -2,12 +2,16 @@ package com.br.peti9.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.br.peti9.dto.TutorDto;
 import com.br.peti9.entities.Tutor;
 import com.br.peti9.repository.TutorRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class TutorService  {
@@ -51,12 +55,19 @@ public class TutorService  {
         }
     }
 
-    public Tutor searchById(int id) {
-        return tutorRepository.findById(id).get();
+    public TutorDto searchById(int id) {
+    Optional<Tutor> tutorOptional = tutorRepository.findById(id);
+    
+    if (tutorOptional.isPresent()) {
+        Tutor tutor = tutorOptional.get();
+        return new TutorDto(tutor);
+    } else {
+        throw new EntityNotFoundException("Tutor not found");
     }
+}
 
-    public List<Tutor> getListTutor() {
-        return tutorRepository.findAll();
+    public List<TutorDto> getListTutor() {
+        return tutorRepository.findAll().stream().map(TutorDto::new).collect(Collectors.toList());
     }
 
     public List<Tutor> searchTutorsByName(String name) {

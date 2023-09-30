@@ -13,6 +13,8 @@ import com.br.peti9.entities.Tutor;
 import com.br.peti9.repository.PetRepository;
 import com.br.peti9.repository.TutorRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class PetService {
 
@@ -43,7 +45,14 @@ public class PetService {
     }
 
     public PetDto getPet(int id) {
-        return petRepository.findById(id).map(x -> new PetDto(x)).get();
+        Optional<Pet> petOptional = petRepository.findById(id);
+
+        if (petOptional.isPresent()) {
+            Pet pet = petOptional.get();
+            return new PetDto(pet);
+        } else {
+            throw new EntityNotFoundException("Pet not found");
+        }
     }
 
     public boolean deleteById(int id) {
