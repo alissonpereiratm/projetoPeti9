@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.peti9.dto.PetDto;
-import com.br.peti9.entities.Pet;
+import com.br.peti9.model.Pet;
 import com.br.peti9.services.PetService;
 
 @RestController

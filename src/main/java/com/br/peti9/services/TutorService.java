@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.br.peti9.dto.TutorDto;
-import com.br.peti9.entities.Tutor;
+import com.br.peti9.model.Tutor;
 import com.br.peti9.repository.TutorRepository;
 
 import jakarta.persistence.EntityNotFoundException;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.peti9.dto.TutorDto;
-import com.br.peti9.entities.Tutor;
+import com.br.peti9.model.Tutor;
 import com.br.peti9.services.TutorService;
 
 @RestController

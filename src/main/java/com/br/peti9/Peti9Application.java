@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = {
-		"com.br.peti9.entities",
+		"com.br.peti9.model",
 		"com.br.peti9.repository",
 		"com.br.peti9.controllers",
 		"com.br.peti9.services",

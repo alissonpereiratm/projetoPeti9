@@ -1,6 +1,6 @@
 package com.br.peti9.dto;
 
-import com.br.peti9.entities.Tutor;
+import com.br.peti9.model.Tutor;
 
 public class TutorDto extends BaseEntityDto {
 

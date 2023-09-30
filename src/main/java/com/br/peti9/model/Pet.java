@@ -1,4 +1,4 @@
-package com.br.peti9.entities;
+package com.br.peti9.model;
 
 import java.util.Date;
 

@@ -1,7 +1,7 @@
 package com.br.peti9.dto;
 
-import com.br.peti9.entities.Pet;
-import com.br.peti9.entities.Tutor;
+import com.br.peti9.model.Pet;
+import com.br.peti9.model.Tutor;
 
 public class PetDto extends BaseEntityDto {
     
