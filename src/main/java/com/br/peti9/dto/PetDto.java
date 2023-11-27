@@ -14,6 +14,7 @@ public class PetDto extends BaseEntityDto {
     public PetDto(Pet pet) {
         this.id=pet.getId();
         this.name = pet.getName();
+         this.breed = pet.getBreed();
         this.tutor=pet.getTutor();
     }
     

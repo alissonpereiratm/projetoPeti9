@@ -25,7 +25,7 @@ public class PetController {
     PetService petService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody Pet pet) {
+    public ResponseEntity<String> register( Pet pet) { // Colocar o @RequestBody para consumir a api no flutterFlow
         return switch (petService.register(pet)) {
             case 1 -> ResponseEntity.ok("Existing pet name!");
             case 2 -> ResponseEntity.ok("Pet saved successfully!");

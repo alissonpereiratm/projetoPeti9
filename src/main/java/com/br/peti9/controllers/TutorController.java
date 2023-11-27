@@ -25,7 +25,7 @@ public class TutorController {
   TutorService tutorService;
 
   @PostMapping("/register")
-  public ResponseEntity<String> register(@RequestBody Tutor tutor) {
+  public ResponseEntity<String> register( Tutor tutor) { // Colocar o @RequestBody para consumir a api no flutterFlow
     if (tutorService.register(tutor)) {
       return ResponseEntity.ok("Tutor successfully saved!");
     }
